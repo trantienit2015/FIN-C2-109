@@ -1,0 +1,8 @@
+# Runtime parameters — loaded separately from config/agent.yaml (the static
+# discovery manifest) and passed to the graph as Graph(config=...).
+max_retry: 3
+timeout_seconds: 30
+top_k: 8
+eu_ai_act_version: "2024/1689"
+fsa_mrm_version: "2024-draft"
+japan_ai_promo_version: "2025"

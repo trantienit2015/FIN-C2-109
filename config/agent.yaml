@@ -1,0 +1,32 @@
+# Agent Manifest — AgentRegistry entry point
+# AgentRegistry reads every key below at ROOT level. Nesting them under an
+# `agent:` block makes them invisible to the registry: namespace and enabled
+# fall back to defaults and name/version never resolve.
+id: "FIN-C2-109"
+name: "Financial Services EU AI Act High-Risk AI Compliance Q&A Agent"
+namespace: "fin"
+version: "0.1.0"
+enabled: true
+category: "Cat 2"
+industry: "FIN"
+
+# Base pattern reference (L1-direct inheritance; not an import target)
+base_type: "RAGAgent"
+
+# Entry point — a single dotted import path (module.Class), not a module:/class:
+# split. AgentRegistry does class.rsplit(".", 1) to get (module, class_name).
+class: "src.graph.graph.FinC2109Graph"
+
+# Security
+required_trust_level: "VERIFIED_EXTERNAL"
+
+# Compile-time gates. Both lists are declared explicitly, and both are empty on purpose.
+# The language model is optional: with no client passed, the classification step returns
+# its default verdict. Declaring its three connection values (or the provider extra) here
+# would make an optional dependency a startup prerequisite.
+requires:
+  secrets: []
+  extras: []
+
+# Runtime parameters live in config/config.yaml. AgentRegistry loads that file
+# separately and passes its contents as Graph(config=...).
